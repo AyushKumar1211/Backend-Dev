@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Image Gallery</title>
+  <style>
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 10px;
+    }
+    img {
+      width: 150px;
+      cursor: pointer;
+      border: 2px solid black;
+    }
+  </style>
+</head>
+<body>
+
+<h1>Images</h1>
+
+<div class="gallery">
+  <% images.forEach((img, index) => { %>
+    <% if(index === 0 && currentPage < totalPages) { %>
+      <!-- first image = next page -->
+      <a href="/?page=<%= currentPage + 1 %>">
+        <img src="/<%= img %>" alt="image">
+      </a>
+    <% } else { %>
+      <img src="/<%= img %>" alt="image">
+    <% } %>
+  <% }) %>
+</div>
+
+<br><br>
+
+<!-- navigation -->
+<div>
+  <% if(currentPage > 1) { %>
+    <a href="/?page=<%= currentPage - 1 %>">⬅ Prev</a>
+  <% } %>
+
+  &nbsp;&nbsp; Page <%= currentPage %> of <%= totalPages %> &nbsp;&nbsp;
+
+  <% if(currentPage < totalPages) { %>
+    <a href="/?page=<%= currentPage + 1 %>">Next ➡</a>
+  <% } %>
+</div>
+
+</body>
+</html>
